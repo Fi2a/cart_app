@@ -18,7 +18,7 @@ const rendering = () => {
       list.splice(i, 1);
       rendering();
     };
-
+    //
     const edit = document.createElement("button");
     edit.innerText = "수정";
     edit.onclick = () => {
