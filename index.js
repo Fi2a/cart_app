@@ -1,4 +1,12 @@
-let list = ["우유", "계란", "유부초밥", "한우++"];
+const db = localStorage;
+
+const data = db.getItem("list");
+// null = 아무것도 없는 값  // object memory
+// undefined = 아무것도 없음
+
+const newData = JSON.parse(data);
+
+let list = newData ?? []; // ?? 앞에 조건이 만족되지 않을 때 안전하게 출 초기값
 
 const rendering = () => {
   const ul = document.querySelector("ul");
@@ -15,8 +23,6 @@ const rendering = () => {
 
       rendering();
     };
-
-    console.log(`${button}`);
 
     const p = document.createElement("p");
     p.innerText = list[i];
@@ -55,16 +61,16 @@ const input = document.getElementById("item");
 form.addEventListener("submit", (event) => {
   event.preventDefault(); // form 태그 한정 새로고침 방지
 
-  console.log(event);
-
   const item = input.value;
   if (item.length === 0) {
     alert("장 볼 물건 입력 ㄱㄱ");
     return input.focus();
   }
 
-  console.log(item);
   list.unshift(item);
+
+  console.log(list);
+  db.setItem("list", JSON.stringify(list));
 
   rendering();
 
